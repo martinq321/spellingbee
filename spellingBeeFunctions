@@ -10,7 +10,7 @@ gr[letters_]:=Quiet@Module[{wrd,lf},
 wrd=ToString/@letters;lf=lt[wrd];
 Grid[Join[{{}},{{Graphics[{EdgeForm[Thickness[.01]],White,Polygon[CirclePoints[6]+Sqrt[3]ConstantArray[#,6]]&/@(RotationMatrix[Pi/6].#&/@CirclePoints[6]),Yellow,Polygon[CirclePoints[6]],Black,With[{a=ToUpperCase/@ToString/@RandomSample[Rest@lf,Length@lf-1],b=Sqrt[3]RotationMatrix[Pi/6].#&/@CirclePoints[6]},Style[Text[#,#2],60]&@@@Thread@{a,b}],(*Hue[1,.9,.9],*)
 Style[Text[ToUpperCase@ToString@First@lf,{0,0}],60]},ImageSize->300]}},
-{{With[{lis=qm[ToExpression/@lt[wrd]]},SortBy[#,Length@Characters@#&]&/@{Complement[lis[[1]],#],#,{lis[[2]]}}&@Select[lis[[1]],Length[Complement[wrd,Characters[#]]]==0&]]}},{{}}],Alignment->Left,Spacings->{0, 10}]];
+{{With[{lis=qm[ToExpression/@lt[wrd]]},SortBy[#,Length@Characters@#&]&/@{Complement[lis[[1]],#],#,{lis[[2]]}}&@Select[lis[[1]],Length[Complement[wrd,Characters[#]]]==0&]]}},{{}}],Alignment->Left,Spacings->{0, 15}]];
 (*
 gr[fc[]]
 gr[{m,b,o,n,h,i,t}]
