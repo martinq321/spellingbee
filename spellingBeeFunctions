@@ -8,7 +8,7 @@ fc[]:=Characters@RandomChoice[wb];
 lt[word_]:=Flatten@With[{lt=With[{li=DeleteDuplicates@Characters@word},RandomSample[li,Length@li]]},ToExpression/@RotateLeft[lt,(Position[#,Min[#]]&[lt/.wr])[[1]]-1]];
 gr[letters_]:=Quiet@Module[{wrd,lf},
 wrd=ToString/@letters;lf=lt[wrd];
-Grid[Join[{{}},{{Graphics[{EdgeForm[{White,Thickness[.01]}],Fold[Lighter,Gray,Range@2],Polygon[CirclePoints[6]+Sqrt[3]ConstantArray[#,6]]&/@(RotationMatrix[Pi/6].#&/@CirclePoints[6]),Yellow,Polygon[CirclePoints[6]],Black,With[{a=ToUpperCase/@ToString/@RandomSample[Rest@lf,Length@lf-1],b=Sqrt[3]RotationMatrix[Pi/6].#&/@CirclePoints[6]},Style[Text[#,#2],60]&@@@Thread@{a,b}],(*Hue[1,.9,.9],*)
+Grid[Join[{{}},{{Graphics[{EdgeForm[{White,Thickness[.01]}],Fold[Lighter,Gray,2],Polygon[CirclePoints[6]+Sqrt[3]ConstantArray[#,6]]&/@(RotationMatrix[Pi/6].#&/@CirclePoints[6]),Yellow,Polygon[CirclePoints[6]],Black,With[{a=ToUpperCase/@ToString/@RandomSample[Rest@lf,Length@lf-1],b=Sqrt[3]RotationMatrix[Pi/6].#&/@CirclePoints[6]},Style[Text[#,#2],60]&@@@Thread@{a,b}],(*Hue[1,.9,.9],*)
 Style[Text[ToUpperCase@ToString@First@lf,{0,0}],60]},ImageSize->300]}},
 {{With[{lis=qm[ToExpression/@lt[wrd]]},SortBy[#,Length@Characters@#&]&/@{Complement[lis[[1]],#],#,{lis[[2]]}}&@Select[lis[[1]],Length[Complement[wrd,Characters[#]]]==0&]]}},{{}}],Alignment->Left,Spacings->{0, 20}]];
 (*
