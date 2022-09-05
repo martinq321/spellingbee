@@ -49,5 +49,8 @@ li=SplitBy[li2,Length[Characters[#]]&];
 count=Thread[{Range@Length@li+3,Length/@li}];
 li]]}*)},Alignment->Left]];
 testingfull[letters_]:=testingfull[letters,0];
-(*testingfull[{l,i,o,w,n,d,h}]*)
+play[letters_]:=testingfull[letters,0];
+play[]:=testingfull[DeleteDuplicates@Characters@RandomChoice[Select[wl,Length@DeleteDuplicates@Characters@#==7&]]];
 (*testingfull[letterselect[2, 5], 1]*)
+(*play[{y, s, i, e, t, n, l}]*)
+(*play[]*)
