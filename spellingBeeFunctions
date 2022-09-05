@@ -42,11 +42,11 @@ ToString[Tr[MemberQ[li2,#]/.{True->1,False->0}&/@#&@guesses]]<>"/"<>ToString[Len
 inpt[li2_]:=DynamicModule[{input=""},Column[{EventHandler[InputField[Dynamic[input],String,ContinuousAction->True,FieldSize->{40,5}],"ReturnKeyDown":>FrontEndExecute[{NotebookWrite[InputNotebook[],",",After]}]],Dynamic@InputForm[test[input,li2]]}]];
 testing[letters_,hardness_]:=
 Module[{},li2=First@qm@letters;li3=Select[li2,Length@Intersection[Characters@#,ToString/@letters]==7&];
-Grid[{{Length/@{li2,li3}},{Show[gr2[ToString/@letters,hardness],ImageSize->300]},{inpt[li2]}},Alignment->Left]
+Grid[{{Show[gr2[ToString/@letters,hardness],ImageSize->300]},{inpt[li2]}},Alignment->Left]
 ];
 testing[letters_]:=testing[letters,0];
 testingfull[letters_,hardness_]:=Module[{},li2=llist[letters,hardness];li3=Select[li2,Length@Intersection[Characters@#,ToString/@letters]==7&];
-Grid[{{Length/@{li2,li3}},{Show[gr2[ToString/@letters,hardness],ImageSize->300]},{inpt[li2]}},Alignment->Left]
+Grid[{{Show[gr2[ToString/@letters,hardness],ImageSize->300]},{inpt[li2]}},Alignment->Left]
 ];
 testingfull[letters_]:=testingfull[letters,0];
 (*
