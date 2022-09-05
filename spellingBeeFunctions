@@ -21,11 +21,11 @@ llist[letters_,q_]:=SortBy[Flatten[Table[With[{let=ToExpression/@letters,firstle
 llist[letters_]:=llist[letters,1];
 button[letter_,part_]:=DynamicModule[{a,b,c},a=part[[1]];b=part[[2]];c=part[[3]];
 EventHandler[Style[{EdgeForm[{White,Thickness[.02]}],Polygon[CirclePoints[6]],Text@Style[ToUpperCase@letter,Bold,25]},PolygonBoxOptions->{BaseStyle->Dynamic@If[CurrentValue["MouseOver"],If[CurrentValue[{"MouseButtonTest",1}],Hue[c[[1]],c[[2]],c[[3]]],Hue[b[[1]],b[[2]],b[[3]]]],Hue[a[[1]],a[[2]],a[[3]]]]}],"MouseClicked":>NotebookWrite[EvaluationNotebook[],letter]]];
-buttonA[letter_,part_]:=DynamicModule[{a,b,c},a=part[[1]];b=part[[2]];c=part[[3]];
-EventHandler[Style[{EdgeForm[{White,Thickness[.02]}],Polygon[{{#,-#/#2},{#,#/#2},{-#,#/#2},{-#,-#/#2}}&@@{.6,1.5}],Text@Style[ToUpperCase@letter,Bold,10]},PolygonBoxOptions->{BaseStyle->Dynamic@If[CurrentValue["MouseOver"],If[CurrentValue[{"MouseButtonTest",1}],Hue[c[[1]],c[[2]],c[[3]]],Hue[b[[1]],b[[2]],b[[3]]]],Hue[a[[1]],a[[2]],a[[3]]]]}],"MouseClicked":>NotebookWrite[EvaluationNotebook[],","]]];
-gr2[letters_,q_]:=With[{lett=ToUpperCase/@RotateLeft[If[q==1,ToString/@lt[StringJoin@letters],letters],1]},Graphics[{Translate[button[#,#3],#2]&@@@Thread[{ToLowerCase/@lett,Join[Sqrt[3] RotationMatrix[Pi/6].#&/@CirclePoints[6],{{0,0}}],Join[ConstantArray[{{0,0,.9},{0,0,.95},{0,0,.5}},6],{{{0.15,0.85,1},{0.15,0.25,1},{0.15,1,0.9}}}]}],
-Translate[buttonA[#,#3],#2]&@@{"enter",#,{{0,0,.9},{0,0,.95},{0,0,.5}}}&@{{2Sqrt[3]-.25,-(Sqrt[3]+1/2)
-}}}]];
+buttonA[letter_,part_,action_]:=DynamicModule[{a,b,c},a=part[[1]];b=part[[2]];c=part[[3]];
+EventHandler[Style[{EdgeForm[{White,Thickness[.02]}],Polygon[{{#,-#/#2},{#,#/#2},{-#,#/#2},{-#,-#/#2}}&@@{.6,1.5}],Text@Style[ToUpperCase@letter,Bold,10]},PolygonBoxOptions->{BaseStyle->Dynamic@If[CurrentValue["MouseOver"],If[CurrentValue[{"MouseButtonTest",1}],Hue[c[[1]],c[[2]],c[[3]]],Hue[b[[1]],b[[2]],b[[3]]]],Hue[a[[1]],a[[2]],a[[3]]]]}],"MouseClicked":>NotebookWrite[EvaluationNotebook[],action]]];
+gr2[letters_,q_]:=With[{lett=ToUpperCase/@RotateLeft[If[q==1,ToString/@lt[StringJoin@letters],letters],1]},Graphics[{Translate[button[#,#3],#2]&@@@Thread[{ToLowerCase/@lett,Join[Sqrt[3] RotationMatrix[Pi/6].#&/@CirclePoints[6],{{0,0}}],Join[ConstantArray[{{0,0,.9},{0,0,.95},{0,0,.5}},6],{{{0.15,0.85,1},{0.15,0.25,1},{0.15,1,0.9}}}]}],Translate[buttonA[#,#3,","],#2]&@@{"enter",#,{{0,0,.9},{0,0,.95},{0,0,.5}}}&@{{2Sqrt[3]-.25,(*1*)-(Sqrt[3]+1/2)}}(*,
+Translate[buttonA[#,#3,"\b"],#2]&@@{"delete",#,{{0,0,.9},{0,0,.95},{0,0,.5}}}&@{{2Sqrt[3]-.25,-(Sqrt[3]+1/2)}}*)
+}]];
 gr2[letters_]:=gr2[letters,1];
 in[input_,li2_]:=Module[{guesses,li,count},guesses=StringSplit[StringReplace[input,{"\n"->","}],","];
 li=SplitBy[li2,Length[Characters[#]]&];
