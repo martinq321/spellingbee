@@ -32,10 +32,22 @@ Join[{ToString[Tr[MemberQ[li2,#]/.{True->1,False->0}&/@#&@guesses]]<>"/"<>ToStri
 Table[ToString[Tr[MemberQ[li[[t[[1]]-3]],#]/.{True->1,False->0}&/@#&@guesses]]<>"/"<>ToString[t[[2]]]<>"  "<>ToString[t[[1]]]<>" letter",{t,count}]]
 ];
 inpt[li2_]:=DynamicModule[{input=""},Column[{EventHandler[InputField[Dynamic[input],String,ContinuousAction->True,FieldSize->{40,5}],"ReturnKeyDown":>FrontEndExecute[{NotebookWrite[InputNotebook[],",",After]}]],Dynamic@Grid[Thread[PadRight[#,4,{""}]&/@Partition[in[input,li2],UpTo@4]],Alignment->Left,Spacings->{2,0}]}]];
+panel[li3_]:=Module[{showhide,i,f,st},showhide=
+Transpose@{{"hide","show"},ToExpression/@{"Transparent","Black"}};
+i=1;f=Mod[#,2]&;
+st={ToExpression@"Transparent"};
+Panel[Column@{Row@{Dynamic@Style[Column@li3,st,18]},Button[ Dynamic@ToString@showhide[[1+f@i,1]],st=showhide[[1+f@i++,2]]]}]];
 testing[letters_,hardness_]:=Module[{},li2=First@qm@letters;li3=Select[li2,Length@Intersection[Characters@#,ToString/@letters]==7&];
-Grid[{{Show[gr2[ToString/@letters,hardness],ImageSize->250]},{inpt[li2]}},Alignment->Left]];
+Grid[{{Show[gr2[ToString/@letters,hardness],ImageSize->250]},{inpt[li2]},{If[Length@li3>0,panel[li3],""]}(*,{panel[Module[{li,count},
+li=SplitBy[li2,Length[Characters[#]]&];
+count=Thread[{Range@Length@li+3,Length/@li}];
+li]]}*)},Alignment->Left]];
 testing[letters_]:=testing[letters,0];
 testingfull[letters_,hardness_]:=Module[{},li2=llist[letters,hardness];li3=Select[li2,Length@Intersection[Characters@#,ToString/@letters]==7&];
-Grid[{{Show[gr2[ToString/@letters,hardness],ImageSize->250]},{inpt[li2]}},Alignment->Left]];
+Grid[{{Show[gr2[ToString/@letters,hardness],ImageSize->250]},{inpt[li2]},{If[Length@li3>0,panel[li3],""]}(*,{panel[Module[{li,count},
+li=SplitBy[li2,Length[Characters[#]]&];
+count=Thread[{Range@Length@li+3,Length/@li}];
+li]]}*)},Alignment->Left]];
 testingfull[letters_]:=testingfull[letters,0];
 (*testingfull[{l,i,o,w,n,d,h}]*)
+(*testing[letterselect[2, 5], 1]*)
