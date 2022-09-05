@@ -15,7 +15,6 @@ Grid[Join[{{}},{{Graphics[{EdgeForm[{White,Thickness[.02]}],GrayLevel[.9],Polygo
 With[{lis=qm[ToExpression/@If[lt1==1,lt[wrd],wrd]]},SortBy[#,Length@Characters@#&]&/@{Complement[lis[[1]],#],#,{lis[[2]]}}&@Select[lis[[1]],Length[Complement[wrd,Characters[#]]]==0&]]
 }},{{}}],Alignment->Left,Spacings->{0,pad}]];
 gr[letters_]:=gr[letters,0,0];
-longlist=ToExpression/@Import["C:\\Users\\martinbelton\\Downloads\\longlist.txt","Data"];
 qr[list_]:=qm[ToExpression/@lt[#]]&/@list;
 (*longlist=Thread[{wb,qm[ToExpression/@lt[#]]&/@wb}];
 Export["C:\\Users\\martinbelton\\Downloads\\longlist.txt",longlist]*)
