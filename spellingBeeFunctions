@@ -50,4 +50,4 @@ count=Thread[{Range@Length@li+3,Length/@li}];
 li]]}*)},Alignment->Left]];
 testingfull[letters_]:=testingfull[letters,0];
 (*testingfull[{l,i,o,w,n,d,h}]*)
-(*testing[letterselect[2, 5], 1]*)
+(*testingfull[letterselect[2, 5], 1]*)
