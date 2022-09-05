@@ -1,3 +1,6 @@
+(*ToExpression /@ Import["https://raw.githubusercontent.com/martinq321/spellingbee/main/spellingBeeFunctions"]*)
+(*https://raw.githubusercontent.com/martinq321/spellingbee/main/spellingBeeFunctions*)
+(*https://github.com/martinq321/spellingbee/blob/main/spellingBeeFunctions*)
 ClearAll["Global`*"];
 Clear[a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z];
 qm[lettersT_]:=Module[{fg,sb},fg[string_,letter_]:=Length[Intersection[Characters@string,{ToString[letter]}]];
