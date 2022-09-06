@@ -53,15 +53,15 @@ testingfull[letters_]:=testingfull[letters,0];
 play[letters_]:=testingfull[letters,0];
 play[]:=testingfull[letterchoice[]];
 playquick[]:=testing[letterchoice[]];
-pquick[n_] := testing[ToString /@ letterchoice[], n];
-pquick[] := playquick[1];
-plong[n_] := testingfull[ToString /@ letterchoice[], n];
-plong[n_] := play[1];
+playshort[n_] := testing[ToString /@ letterchoice[], n];
+playshort[] := playshort[1];
+playlong[n_] := testingfull[ToString /@ letterchoice[], n];
+playlong[n_] := playlong[1];
 (*testingfull[letterselect[2,5],1]*)
 (*testingfull[ToString /@ letterchoice[], 1]*)
 (*play[{y,s,i,e,t,n,l}]*)
 (*play[]*)
 (*playquick[]*)
 (*SplitBy[li2,Length[Characters[#]]&]*)
-(*pquick[]*)
-(*plong[]*)
+(*playshort[0]*)
+(*playlong[1]*)
