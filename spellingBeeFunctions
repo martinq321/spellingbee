@@ -26,9 +26,7 @@ EventHandler[Style[{EdgeForm[{White,Thickness[.02]}],Polygon[{{#,-#/#2},{#,#/#2}
 buttonB[]:=Button[Style["DELETE",Bold,10],SelectionMove[EvaluationNotebook[],Previous,Character];
 SelectionMove[EvaluationNotebook[],All,Character];
 NotebookDelete[EvaluationNotebook[]],Appearance->{"Default"->#,"Hover"->#2,"Pressed"->#3}]&@@Table[Rasterize[Graphics[{EdgeForm[{White,Thickness[.02]}],c,Polygon[{{#,-#/#2},{#,#/#2},{-#,#/#2},{-#,-#/#2}}&@@{.6,1.5}]}],ImageSize->(Sqrt[2]-1)*100],{c,{GrayLevel[#],GrayLevel[#2],GrayLevel[#3]}&@@{.9,.95,.5}}];
-gr2[letters_,q_]:=With[{lett=ToUpperCase/@RotateLeft[If[q==1,ToString/@lt[StringJoin@letters],letters],1]},Graphics[{Translate[button[#,#3],#2]&@@@Thread[{ToLowerCase/@lett,Join[Sqrt[3] RotationMatrix[Pi/6].#&/@CirclePoints[6],{{0,0}}],Join[ConstantArray[{{0,0,.9},{0,0,.95},{0,0,.5}},6],{{{0.15,0.85,1},{0.15,0.25,1},{0.15,1,0.9}}}]}],Translate[buttonA[#,#3,","],#2]&@@{"enter",#,{{0,0,.9},{0,0,.95},{0,0,.5}}}&@{{2Sqrt[3]-.25,1-(Sqrt[3]+1/2)}},(*Translate[buttonA[#,#3,action],#2]&@@{"delete",#,{{0,0,.9},{0,0,.95},{0,0,.5}}}&@{{2Sqrt[3]-.25,-(Sqrt[3]+1/2)}}*)
-Inset[buttonB[],{2Sqrt[3]-.25,-(Sqrt[3]+1/2)}]
-}]];
+gr2[letters_,q_]:=With[{lett=ToUpperCase/@RotateLeft[If[q==1,ToString/@lt[StringJoin@letters],letters],1]},Graphics[{Translate[button[#,#3],#2]&@@@Thread[{ToLowerCase/@lett,Join[Sqrt[3] RotationMatrix[Pi/6].#&/@CirclePoints[6],{{0,0}}],Join[ConstantArray[{{0,0,.9},{0,0,.95},{0,0,.5}},6],{{{0.15,0.85,1},{0.15,0.25,1},{0.15,1,0.9}}}]}],Translate[buttonA[#,#3,","],#2]&@@{"enter",#,{{0,0,.9},{0,0,.95},{0,0,.5}}}&@{{2Sqrt[3]-.25,1-(Sqrt[3]+1/2)}},(*Translate[buttonA[#,#3,action],#2]&@@{"delete",#,{{0,0,.9},{0,0,.95},{0,0,.5}}}&@{{2Sqrt[3]-.25,-(Sqrt[3]+1/2)}}*)Inset[buttonB[],{2Sqrt[3]-.25,-(Sqrt[3]+1/2)}]}]];
 gr2[letters_]:=gr2[letters,1];
 in[input_,li2_]:=Module[{guesses,li,count},guesses=StringSplit[StringReplace[input,{"\n"->","}],","];
 li=SplitBy[li2,Length[Characters[#]]&];
@@ -53,15 +51,9 @@ testingfull[letters_]:=testingfull[letters,0];
 play[letters_]:=testingfull[letters,0];
 play[]:=testingfull[letterchoice[]];
 playquick[]:=testing[letterchoice[]];
-playshort[n_] := testing[ToString /@ letterchoice[], n];
-playshort[] := playshort[1];
-playlong[n_] := testingfull[ToString /@ letterchoice[], n];
-playlong[n_] := playlong[1];
 (*testingfull[letterselect[2,5],1]*)
-(*testingfull[ToString /@ letterchoice[], 1]*)
+(*testingfull[ToString/@letterchoice[],1]*)
 (*play[{y,s,i,e,t,n,l}]*)
 (*play[]*)
 (*playquick[]*)
 (*SplitBy[li2,Length[Characters[#]]&]*)
-(*playshort[0]*)
-(*playlong[1]*)
