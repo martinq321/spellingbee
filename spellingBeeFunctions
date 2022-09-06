@@ -54,6 +54,7 @@ play[letters_]:=testingfull[letters,0];
 play[]:=testingfull[letterchoice[]];
 playquick[]:=testing[letterchoice[]];
 (*testingfull[letterselect[2,5],1]*)
+(*testingfull[ToString /@ letterchoice[], 1]*)
 (*play[{y,s,i,e,t,n,l}]*)
 (*play[]*)
 (*playquick[]*)
