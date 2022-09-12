@@ -60,3 +60,6 @@ playquick[]:=testing[letterchoice[]];
 (*play[]*)
 (*playquick[]*)
 (*SplitBy[li2,Length[Characters[#]]&]*)
+newWordData = 
+Complement[WordData[], 
+Import["https://raw.githubusercontent.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words/master/en", "List"]];
