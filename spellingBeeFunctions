@@ -40,12 +40,12 @@ panel[li3_]:=Module[{showhide,i,f,st},showhide=Transpose@{{"hide","show"},ToExpr
 i=1;f=Mod[#,2]&;
 st={ToExpression@"Transparent"};
 Panel[Column@{Row@{Dynamic@Style[Column@li3,st,18]},Button[Dynamic@ToString@showhide[[1+f@i,1]],st=showhide[[1+f@i++,2]]]}]];
-testing[letters_,hardness_]:=Module[{},li2=Complement[#,Import["https://raw.githubusercontent.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words/master/en","List"]]&@First@qm@letters;li3=Select[li2,Length@Intersection[Characters@#,ToString/@letters]==7&];
+testing[letters_,hardness_]:=Module[{},li2=First@qm@letters;li3=Select[li2,Length@Intersection[Characters@#,ToString/@letters]==7&];
 Grid[{{Show[gr2[ToString/@letters,hardness],ImageSize->300]},{inpt[li2]},{If[Length@li3>0,panel[li3],""]}(*,{panel[Module[{li,count},li=SplitBy[li2,Length[Characters[#]]&];
 count=Thread[{Range@Length@li+3,Length/@li}];
 li]]}*)},Alignment->Left]];
 testing[letters_]:=testing[letters,0];
-testingfull[letters_,hardness_]:=Module[{},li2=Complement[#,Import["https://raw.githubusercontent.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words/master/en","List"]]&@llist[ToString/@letters,hardness];li3=Select[li2,Length@Intersection[Characters@#,ToString/@letters]==7&];
+testingfull[letters_,hardness_]:=Module[{},li2=llist[ToString/@letters,hardness];li3=Select[li2,Length@Intersection[Characters@#,ToString/@letters]==7&];
 Grid[{{Show[gr2[ToString/@letters,hardness],ImageSize->300]},{inpt[li2]},{If[Length@li3>0,panel[li3],""]}(*,{panel[Module[{li,count},li=SplitBy[li2,Length[Characters[#]]&];
 count=Thread[{Range@Length@li+3,Length/@li}];
 li]]}*)},Alignment->Left]];
@@ -60,3 +60,4 @@ playquick[]:=testing[letterchoice[]];
 (*play[]*)
 (*playquick[]*)
 (*SplitBy[li2,Length[Characters[#]]&]*)
+(*li2=Complement[#,Import["https://raw.githubusercontent.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words/master/en","List"]]&@llist[ToString/@letters,hardness];*)
