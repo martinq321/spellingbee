@@ -32,7 +32,9 @@ score[w_]:=If[Length@Characters@w==4,1,If[Length@DeleteDuplicates@Characters@w==
 in[input_,li2_]:=Module[{guesses,li,count},guesses=StringSplit[StringReplace[input,{"\n"->","}],","];
 li=SplitBy[li2,Length[Characters[#]]&];
 count=Thread[{Range@Length@li+3,Length/@li,Length/@Characters/@First/@li}];
-Join[{Tr[score/@guesses]},{With[{q=#},Fold[If[q<=#2[[1]],#2,#]&,#[[1]],Rest[#]]&@Reverse@Thread[{Floor[.75Tr[score/@li2]#/Max@#&@(#^2.5&/@Range@9)],{"beginner","good start","moving up","good","solid","nice","great","amazing","genius"}}]][[2]]&@Tr[score/@guesses]},{""},{ToString[Tr[MemberQ[li2,#]/.{True->1,False->0}&/@#&@guesses]]<>"/"<>ToString[Length@li2](*<>" words found:"*)},Table[ToString[Tr[MemberQ[li[[t[[1]]-3]],#]/.{True->1,False->0}&/@#&@guesses]]<>"/"<>ToString[t[[2]]]<>"  "<>ToString[t[[3]]]<>" letter",{t,count}]]];
+Join[{Tr[score/@guesses]},{
+With[{q=#},Fold[If[q<#2[[1]],#2,#]&,#[[1]],Rest[#]]&@Reverse@Thread[{Join[Floor[.75Tr[score/@li2]#/Max@#&@(#^2.5&/@Range[2,9])],{10^5}],{"beginner","good start","moving up","good","solid","nice","great","amazing","genius"}}]][[2]]&@Tr[score/@guesses]
+},{""},{ToString[Tr[MemberQ[li2,#]/.{True->1,False->0}&/@#&@guesses]]<>"/"<>ToString[Length@li2](*<>" words found:"*)},Table[ToString[Tr[MemberQ[li[[t[[1]]-3]],#]/.{True->1,False->0}&/@#&@guesses]]<>"/"<>ToString[t[[2]]]<>"  "<>ToString[t[[3]]]<>" letter",{t,count}]]];
 inpt[li2_]:=DynamicModule[{input=""},Column[{EventHandler[InputField[Dynamic[input],String,ContinuousAction->True,FieldSize->{30,5}],"ReturnKeyDown":>FrontEndExecute[{NotebookWrite[InputNotebook[],",",After]}]],Dynamic@Grid[Thread[PadRight[#,4,{""}]&/@Partition[in[input,li2],UpTo@4]],Alignment->Left,Spacings->{2,0}]}]];
 panel[li3_]:=Module[{showhide,i,f,st},showhide=Transpose@{{"hide","show"},ToExpression/@{"Transparent","Black"}};
 i=1;f=Mod[#,2]&;
