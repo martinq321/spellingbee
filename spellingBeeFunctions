@@ -54,6 +54,13 @@ testingfull[letters_]:=testingfull[ToString/@letters,0];
 play[letters_]:=testingfull[letters,0];
 play[]:=testingfull[letterchoice[]];
 playquick[]:=testing[letterchoice[]];
+spBee[letters_,first_]:=Module[{pieces,size,li,chars},chars=Join[#2,Complement[#,#2]]&@@(Characters/@ToString/@{letters,first});
+size=1000;li=Thread@ConstantArray[ToUpperCase/@chars,4];
+pieces=Flatten[Thread[Partition[Join[Graphics[{EdgeForm[None],Hue[0.15,0.85,1],Polygon[{{#,-#},{#,#},{-#,#},{-#,-#}}&[.5]],Black,Text[Style[#,size/24],{0,0}]},ImageSize->size/12]&/@li[[1]],Graphics[{EdgeForm[None],GrayLevel[.9],Polygon[{{#,-#},{#,#},{-#,#},{-#,-#}}&[.5]],Black,Text[Style[#,size/24],{0,0}]},ImageSize->size/12]&/@Flatten[Rest[li]]],4]]];
+DynamicModule[{p=Flatten[ConstantArray[{{1,3},{2,3},{3,3},{4,3},{5,3},{6,3},{7,3}},4],1]},
+Deploy@Graphics[{Table[{FaceForm[None],EdgeForm[GrayLevel[.95]],FaceForm[White],Rectangle[{i-2,j-2}-.5,{i-1,j-1}-.5]},{i,1,11,1},{j,3,3,1}],
+Table[With[{i=i},Locator[Dynamic[p[[i]],(p[[i]]=Round/@#)&],pieces[[i]]]],{i,4*7}]
+},Frame->False,ImageSize->size]]];
 (*testingfull[letterselect[2,5],1]*)
 (*testingfull[ToString/@letterchoice[],1]*)
 (*play[{y,s,i,e,t,n,l}]*)
@@ -61,3 +68,4 @@ playquick[]:=testing[letterchoice[]];
 (*playquick[]*)
 (*SplitBy[li2,Length[Characters[#]]&]*)
 (*li2=Complement[#,Import["https://raw.githubusercontent.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words/master/en","List"]]&@llist[ToString/@letters,hardness];*)
+(*spBee[handout,a]*)
